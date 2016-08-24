@@ -54,6 +54,6 @@ node default {
   
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
-     command  => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+     command  => "/usr/local/bin/cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
   }
 }
