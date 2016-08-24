@@ -46,6 +46,7 @@ node default {
   include examples::fundamentals
   include users
   include skeleton
+  include memcached
   
   #file { '/etc/motd':
   #   ensure => file,
