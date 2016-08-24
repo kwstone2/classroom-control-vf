@@ -1,5 +1,5 @@
 class skeleton {
-   file {
+   file { '/etc/skel':
       ensure  => directory,
       owner   => 'root',
       group   => 'root',
@@ -11,10 +11,6 @@ class skeleton {
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-   }
-   
-   file { 'bashrc':
-      path    => '/etc/skel/.bashrc',
-      source  => 'puppet:///modules/skeleton/bashrc',
+      source  => 'puppet:///modules/skeleton/bashrc',      
    }
 }
