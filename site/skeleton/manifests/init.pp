@@ -7,14 +7,14 @@ class skeleton {
    }
    
    file { '/etc/skel/.bashrc':
-      ensure  => present,
+      ensure  => file,
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
    }
    ->
-   file_line { 'Append to skel .bashrc':
+   file { 'bashrc':
       path    => '/etc/skel/.bashrc',
-      line    => '/bin/echo I'm skeleton in the closet',
+      source  => 'puppet:///modules/skeleton/bashrc',
    }
 }
