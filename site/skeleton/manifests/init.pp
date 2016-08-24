@@ -15,6 +15,6 @@ class skeleton {
    ->
    file_line { 'Append to skel .bashrc':
       path    => '/etc/skel/.bashrc',
-      line    => '/bin/echo I'm skeleton in the closet
+      line    => '/bin/echo I'm skeleton in the closet',
    }
 }
