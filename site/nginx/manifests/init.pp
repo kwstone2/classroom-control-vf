@@ -5,8 +5,8 @@ class nginx {
 
   file { '/etc/nginx/nginx.conf':
     ensure  => file,
-    owner   => root,
-    group   => root,
+    owner   => 'root',
+    group   => 'root',
     require => Package['nginx'],
     mode    => '0644',
     source  => 'puppet:///modules/nginx/nginx.conf',
@@ -37,7 +37,7 @@ class nginx {
   }
   
   service { 'nginx':
-    subscribe => File['/etc/nginx/nginx.conf'],
+    subscribe => [File['/etc/nginx/nginx.conf'], File['/etc/nginx/nginx.conf']],
     ensure    => running,
     enable   => true,
   }
