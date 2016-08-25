@@ -48,12 +48,12 @@ class nginx {
     source  => 'puppet:///modules/nginx/nginx.conf',
   }
   
-  file { "{$docroot}":
+  file { "$docroot":
     ensure  => directory,
     mode    => '0755',
   }
   
-  file { "{$docroot}/index.html":
+  file { "$docroot/index.html":
     source  => 'puppet:///modules/nginx/index.html',
   }
   
