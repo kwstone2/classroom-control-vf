@@ -43,7 +43,7 @@ class nginx {
     ensure  => present,
   }
 
-  file { "{$configdir/nginx.conf}":
+  file { "{$configdir}/nginx.conf":
     require => Package["{$pkgname}"],
     source  => 'puppet:///modules/nginx/nginx.conf',
   }
