@@ -1,5 +1,37 @@
 class nginx {
 
+  case $::os['family'] {
+    'redhat', 'debian' : {
+      $pkgname   = 'nginx'
+      $fileowner = 'root'
+      $filegroup = 'root'
+      $docroot   = '/var/www'
+      $configdir = '/etc/nginx'
+      $srvblkdir = '/etc/nginx/conf.d'
+      $logdir    = '/var/log/nginx'
+      $svcname   = 'nginx'
+    }
+    'windows' : {
+      $pkgname   = 'nginx-service'
+      $fileowner = 'Administrator'
+      $filegroup = 'Administrators'
+      $docroot   = 'C:/ProgramData/nginx/html'
+      $configdir = 'C:/ProgramData/nginx'
+      $srvblkdir = 'C:/ProgramData/nginx/conf.d'
+      $logdir    = 'C:/ProgramData/nginx/logs'
+      $runsas    = 'nobody'
+      $svcname   = 'nginx' 
+    }
+    default : {
+      fail("Module ${module_name} is not supported on ${os['family']}" )
+    }
+  }
+
+  $runsas = $::os['family'] ? {
+    'RedHat' => 'nginx',
+    'Debian' => 'www-data',
+  }
+
   File {
     owner  => 'root',
     group  => 'root',
@@ -7,29 +39,29 @@ class nginx {
     ensure => file,
   }
 
-  package { 'nginx':
+  package { "{$pkgname}":
     ensure  => present,
   }
 
-  file { '/etc/nginx/nginx.conf':
+  file { "{$configdir/nginx.conf}":
     require => Package['nginx'],
     source  => 'puppet:///modules/nginx/nginx.conf',
   }
   
-  file { '/var/www':
+  file { "{$docroot}":
     ensure  => directory,
     mode    => '0755',
   }
   
-  file { '/var/www/index.html':
+  file { "{$docroot}/index.html":
     source  => 'puppet:///modules/nginx/index.html',
   }
   
-  file { '/etc/nginx/conf.d/default.conf':
+  file { "{$srvblkdir}/default.conf":
     source  => 'puppet:///modules/nginx/default.conf',
   }
   
-  service { 'nginx':
+  service { "{$svcname}":
     subscribe => [File['/etc/nginx/nginx.conf'], File['/etc/nginx/nginx.conf']],
     ensure    => running,
     enable   => true,
