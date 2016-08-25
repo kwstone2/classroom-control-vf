@@ -43,7 +43,7 @@ class nginx {
     ensure  => present,
   }
 
-  file { "{$configdir}/nginx.conf":
+  file { "$configdir/nginx.conf":
     require => Package["{$pkgname}"],
     source  => 'puppet:///modules/nginx/nginx.conf',
   }
@@ -57,12 +57,12 @@ class nginx {
     source  => 'puppet:///modules/nginx/index.html',
   }
   
-  file { "{$srvblkdir}/default.conf":
+  file { "$srvblkdir/default.conf":
     source  => 'puppet:///modules/nginx/default.conf',
   }
   
   service { "{$svcname}":
-    subscribe => [File["{$configdir}/nginx.conf"], File["{$srvblkdir}/default.conf"]],
+    subscribe => [File["$configdir/nginx.conf"], File["$srvblkdir/default.conf"]],
     ensure    => running,
     enable   => true,
   }
