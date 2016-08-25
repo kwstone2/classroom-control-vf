@@ -44,7 +44,7 @@ class nginx {
   }
 
   file { "{$configdir/nginx.conf}":
-    require => Package[$pkgname],
+    require => Package["{$pkgname}"],
     source  => 'puppet:///modules/nginx/nginx.conf',
   }
   
