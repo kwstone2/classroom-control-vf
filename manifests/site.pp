@@ -42,7 +42,10 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  notify { "I think, therefore I am ${::hostname}": }
+  if $::is_virtual {
+    notify { "${::hostname} is virtual": 
+  }
+  }
   include examples::fundamentals
   include users
   include skeleton
