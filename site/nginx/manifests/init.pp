@@ -39,30 +39,30 @@ class nginx {
     ensure => file,
   }
 
-  package { "{$pkgname}":
+  package { $pkgname:
     ensure  => present,
   }
 
-  file { "$configdir/nginx.conf":
-    require => Package["{$pkgname}"],
+  file { "${configdir}/nginx.conf":
+    require => Package[$pkgname],
     source  => 'puppet:///modules/nginx/nginx.conf',
   }
   
-  file { "$docroot":
+  file { $docroot:
     ensure  => directory,
     mode    => '0755',
   }
   
-  file { "$docroot/index.html":
+  file { "${docroot}/index.html":
     source  => 'puppet:///modules/nginx/index.html',
   }
   
-  file { "$srvblkdir/default.conf":
+  file { "${srvblkdir}/default.conf":
     source  => 'puppet:///modules/nginx/default.conf',
   }
   
-  service { "{$svcname}":
-    subscribe => [File["$configdir/nginx.conf"], File["$srvblkdir/default.conf"]],
+  service { $svcname:
+    subscribe => [File["${configdir}/nginx.conf"], File["${srvblkdir}/default.conf"]],
     ensure    => running,
     enable   => true,
   }
