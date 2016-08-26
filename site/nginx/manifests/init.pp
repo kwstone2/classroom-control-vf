@@ -10,11 +10,6 @@ class nginx (
   ) inherits nginx::params
   {
 
-  $docroot = $root ? {
-    undef   => $def_docroot,
-    default => $root,
-  }
-
   File {
     owner  => 'root',
     group  => 'root',
