@@ -1,5 +1,12 @@
 class nginx (
-  $root = nginx::params::root,
+   $pkgname   = $nginx::params::pkgname,
+   $fileowner = $nginx::params::fileowner,
+   $filegroup = $nginx::params::filegroup,
+   $docroot   = $nginx::params::docroot,
+   $configdir = $nginx::params::configdir,
+   $srvblkdir = $nginx::params::srvblkdir,
+   $logdir    = $nginx::params::logdir,
+   $svcname   = $nginx::params::svcname
   ) inherits nginx::params
   {
 
