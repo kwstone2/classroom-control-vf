@@ -51,10 +51,14 @@ node default {
   #include nginx
   include wrappers::epel
   
-#class { 'nginx':
-#  root => "/var/www/html2",
-# }
+  # Capstone
+  class { 'apache': }
   
+  apache::vhost { 'kwstone2':
+    port    => '80',
+    docroot => '/var/www/vhost',
+  }
+
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
      command  => "/usr/local/bin/cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
