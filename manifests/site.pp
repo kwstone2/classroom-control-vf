@@ -43,19 +43,12 @@ node default {
   # Example:
   #   class { 'my_class': }
 
-  notify { hiera('ksmessage':) }
+  notify { hiera('ksmessage'): }
   include examples::fundamentals
   include users
   include skeleton
   include memcached
   include nginx
-  
-  #file { '/etc/motd':
-  #   ensure => file,
-   #  owner  => 'root',
-  #   group  => 'root',
-   #  mode   => '0644',
-   #}
   
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
