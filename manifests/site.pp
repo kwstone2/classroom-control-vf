@@ -59,6 +59,8 @@ node default {
     docroot => '/var/www/vhost',
   }
 
+  include '::mysql::server'
+  
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
      command  => "/usr/local/bin/cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
