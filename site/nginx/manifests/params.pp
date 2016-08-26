@@ -30,6 +30,7 @@ class nginx::params {
     $runsas = $::os['family'] ? {
     'RedHat' => 'nginx',
     'Debian' => 'www-data',
+    default  => 'nginx',
   }
 
 }
