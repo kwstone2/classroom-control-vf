@@ -49,6 +49,7 @@ node default {
   include skeleton
   include memcached
   include nginx
+  include wrappers::epel
   
 #class { 'nginx':
 #  root => "/var/www/html2",
