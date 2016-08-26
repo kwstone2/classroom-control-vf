@@ -51,7 +51,7 @@ node default {
   #include nginx
   
   class { 'nginx':
-    root => "/var/www",
+    root => "/var/www/html2",
   }
   
   exec { 'cowsaytomotd':
