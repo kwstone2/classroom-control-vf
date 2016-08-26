@@ -46,7 +46,7 @@ node default {
     notify { "${::hostname} is virtual": 
   }
   }
-  notify { $ksmessage }
+  notify { hiera('ksmessage') }
   include examples::fundamentals
   include users
   include skeleton
