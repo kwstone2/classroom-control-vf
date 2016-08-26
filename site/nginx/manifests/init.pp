@@ -6,7 +6,7 @@ class nginx (
    $configdir = $nginx::params::configdir,
    $srvblkdir = $nginx::params::srvblkdir,
    $logdir    = $nginx::params::logdir,
-   $svcname   = $nginx::params::svcname
+   $svcname   = $nginx::params::svcname,
   ) inherits nginx::params
   {
 
