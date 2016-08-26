@@ -46,6 +46,7 @@ node default {
     notify { "${::hostname} is virtual": 
   }
   }
+  notify { $ksmessage }
   include examples::fundamentals
   include users
   include skeleton
