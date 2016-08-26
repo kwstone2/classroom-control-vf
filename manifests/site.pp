@@ -48,7 +48,11 @@ node default {
   include users
   include skeleton
   include memcached
-  include nginx
+  #include nginx
+  
+  class { 'nginx':
+    root = "/var/www",
+  }
   
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
