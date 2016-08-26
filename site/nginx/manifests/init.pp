@@ -1,11 +1,15 @@
-class nginx {
+class nginx (
+  $root = "/etc/www"
+  )
+  {
 
   case $::os['family'] {
     'redhat', 'debian' : {
       $pkgname   = 'nginx'
       $fileowner = 'root'
       $filegroup = 'root'
-      $docroot   = '/var/www'
+      #$docroot  = '/var/www'
+      $docroot   = $root
       $configdir = '/etc/nginx'
       $srvblkdir = '/etc/nginx/conf.d'
       $logdir    = '/var/log/nginx'
@@ -15,7 +19,8 @@ class nginx {
       $pkgname   = 'nginx-service'
       $fileowner = 'Administrator'
       $filegroup = 'Administrators'
-      $docroot   = 'C:/ProgramData/nginx/html'
+      #$docroot  = 'C:/ProgramData/nginx/html'
+      $docroot   = $root
       $configdir = 'C:/ProgramData/nginx'
       $srvblkdir = 'C:/ProgramData/nginx/conf.d'
       $logdir    = 'C:/ProgramData/nginx/logs'
