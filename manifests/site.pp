@@ -60,6 +60,8 @@ node default {
   }
 
   include '::mysql::server'
+  include '::php'
+  
   
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
