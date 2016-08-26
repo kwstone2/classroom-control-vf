@@ -1,5 +1,5 @@
 class nginx (
-  $root = "/etc/www"
+  $root = undef,
   )
   {
 
@@ -8,8 +8,7 @@ class nginx (
       $pkgname   = 'nginx'
       $fileowner = 'root'
       $filegroup = 'root'
-      #$docroot  = '/var/www'
-      $docroot   = $root
+      $def_docroot  = '/var/www'
       $configdir = '/etc/nginx'
       $srvblkdir = '/etc/nginx/conf.d'
       $logdir    = '/var/log/nginx'
@@ -19,8 +18,7 @@ class nginx (
       $pkgname   = 'nginx-service'
       $fileowner = 'Administrator'
       $filegroup = 'Administrators'
-      #$docroot  = 'C:/ProgramData/nginx/html'
-      $docroot   = $root
+      $def_docroot  = 'C:/ProgramData/nginx/html'
       $configdir = 'C:/ProgramData/nginx'
       $srvblkdir = 'C:/ProgramData/nginx/conf.d'
       $logdir    = 'C:/ProgramData/nginx/logs'
@@ -35,6 +33,11 @@ class nginx (
   $runsas = $::os['family'] ? {
     'RedHat' => 'nginx',
     'Debian' => 'www-data',
+  }
+
+  $docroot = $root ? {
+    undef   => $def_docroot,
+    default => $root,
   }
 
   File {
