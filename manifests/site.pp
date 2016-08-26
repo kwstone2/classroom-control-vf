@@ -60,7 +60,7 @@ node default {
   }
 
   include '::mysql::server'
-  include '::php'
+  class { 'apache::mod::php' }
   
   
   exec { 'cowsaytomotd':
