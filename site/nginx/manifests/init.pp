@@ -1,39 +1,7 @@
 class nginx (
-  $root = undef,
-  )
+  $root = nginx::params::root,
+  ) inherits nginx::params
   {
-
-  case $::os['family'] {
-    'redhat', 'debian' : {
-      $pkgname   = 'nginx'
-      $fileowner = 'root'
-      $filegroup = 'root'
-      $def_docroot  = '/var/www'
-      $configdir = '/etc/nginx'
-      $srvblkdir = '/etc/nginx/conf.d'
-      $logdir    = '/var/log/nginx'
-      $svcname   = 'nginx'
-    }
-    'windows' : {
-      $pkgname   = 'nginx-service'
-      $fileowner = 'Administrator'
-      $filegroup = 'Administrators'
-      $def_docroot  = 'C:/ProgramData/nginx/html'
-      $configdir = 'C:/ProgramData/nginx'
-      $srvblkdir = 'C:/ProgramData/nginx/conf.d'
-      $logdir    = 'C:/ProgramData/nginx/logs'
-      $runsas    = 'nobody'
-      $svcname   = 'nginx' 
-    }
-    default : {
-      fail("Module ${module_name} is not supported on ${os['family']}" )
-    }
-  }
-
-  $runsas = $::os['family'] ? {
-    'RedHat' => 'nginx',
-    'Debian' => 'www-data',
-  }
 
   $docroot = $root ? {
     undef   => $def_docroot,
