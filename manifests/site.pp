@@ -59,7 +59,7 @@ node default {
     docroot => '/var/www/vhost',
   }
 
-  include '::mysql::server':
+  class { '::mysql::server': }
   class { 'apache::mod::php' }
   class { 'mysql::bindings':
      php_enable => true,
