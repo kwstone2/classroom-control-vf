@@ -59,9 +59,15 @@ node default {
     docroot => '/var/www/vhost',
   }
 
-  include '::mysql::server'
+  include '::mysql::server':
   class { 'apache::mod::php' }
+  class { 'mysql::bindings':
+     php_enable => true,
+  }
   
+  class { 'wordpress':
+    install_dir => '/var/www/wordpress',
+  }
   
   exec { 'cowsaytomotd':
      creates  => '/etc/motd',
