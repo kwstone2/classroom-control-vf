@@ -42,10 +42,7 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  if $::is_virtual {
-    notify { "${::hostname} is virtual": 
-  }
-  }
+
   notify { hiera('ksmessage') }
   include examples::fundamentals
   include users
