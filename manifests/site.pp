@@ -43,7 +43,7 @@ node default {
   # Example:
   #   class { 'my_class': }
 
-  notify { hiera('ksmessage') }
+  notify { hiera('ksmessage':) }
   include examples::fundamentals
   include users
   include skeleton
